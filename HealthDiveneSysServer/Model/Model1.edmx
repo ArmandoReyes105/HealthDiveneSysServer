@@ -1,0 +1,1267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HealthDivineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+          </Key>
+          <Property Name="IdAccount" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="20" />
+          <Property Name="AccountPassword" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdNutritionist" Type="int" />
+        </EntityType>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="IdAppointment" />
+          </Key>
+          <Property Name="IdAppointment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppointmentDate" Type="date" />
+          <Property Name="StartTime" Type="time" Precision="7" />
+          <Property Name="EndTime" Type="time" Precision="7" />
+          <Property Name="IdPatient" Type="int" />
+          <Property Name="IdNutritionist" Type="int" />
+        </EntityType>
+        <EntityType Name="BodyCompositions">
+          <Key>
+            <PropertyRef Name="IdBodyComposition" />
+          </Key>
+          <Property Name="IdBodyComposition" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VisceralFat" Type="float" />
+          <Property Name="TotalWeight" Type="float" />
+          <Property Name="WaterPercentage" Type="float" />
+          <Property Name="FatPercentage" Type="float" />
+          <Property Name="MusclePercentage" Type="float" />
+          <Property Name="IdPatient" Type="int" />
+          <Property Name="IdDiagnosis" Type="int" />
+        </EntityType>
+        <EntityType Name="Diagnoses">
+          <Key>
+            <PropertyRef Name="IdDiagnosis" />
+          </Key>
+          <Property Name="IdDiagnosis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DiagnosisDate" Type="date" />
+          <Property Name="PhysicalActivity" Type="text" />
+          <Property Name="PhysicalPerception" Type="text" />
+          <Property Name="Feeding" Type="text" />
+          <Property Name="Appetite" Type="text" />
+          <Property Name="WaterConsumption" Type="text" />
+          <Property Name="Dream" Type="text" />
+          <Property Name="StomachUpset" Type="text" />
+          <Property Name="EnergyLevel" Type="text" />
+          <Property Name="StressLevel" Type="text" />
+          <Property Name="SubstanceUse" Type="text" />
+          <Property Name="GeneralComments" Type="text" />
+          <Property Name="IdPatient" Type="int" />
+        </EntityType>
+        <EntityType Name="GeneralInformation">
+          <Key>
+            <PropertyRef Name="IdGeneralInformation" />
+          </Key>
+          <Property Name="IdGeneralInformation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PhysicalActivity" Type="int" />
+          <Property Name="PhysicalActivityComments" Type="text" />
+          <Property Name="FavoriteFoods" Type="text" />
+          <Property Name="NonFavoriteFoods" Type="text" />
+          <Property Name="DietarySupplements" Type="text" />
+          <Property Name="NutritionalFamiliarity" Type="text" />
+          <Property Name="EatingEmotionalBehavior" Type="text" />
+          <Property Name="GeneralComments" Type="text" />
+          <Property Name="IdPatient" Type="int" />
+        </EntityType>
+        <EntityType Name="HabitsAndGoals">
+          <Key>
+            <PropertyRef Name="IdHabitsAndGoals" />
+          </Key>
+          <Property Name="IdHabitsAndGoals" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Caffeine" Type="text" />
+          <Property Name="Alcohol" Type="text" />
+          <Property Name="Cigarette" Type="text" />
+          <Property Name="Drugs" Type="text" />
+          <Property Name="HealthGoals" Type="text" />
+          <Property Name="SpecificNutritionalGoals" Type="text" />
+          <Property Name="Expectations" Type="text" />
+          <Property Name="GeneralComments" Type="text" />
+          <Property Name="IdPatient" Type="int" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="IdImage" />
+          </Key>
+          <Property Name="IdImage" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageComments" Type="text" />
+          <Property Name="ImageData" Type="varbinary(max)" />
+          <Property Name="IdDiagnosis" Type="int" />
+        </EntityType>
+        <EntityType Name="MealPlans">
+          <Key>
+            <PropertyRef Name="IdMealPlan" />
+          </Key>
+          <Property Name="IdMealPlan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Comments" Type="text" />
+          <Property Name="PlanDescription" Type="text" />
+          <Property Name="PlanDate" Type="date" />
+          <Property Name="Recommendations" Type="text" />
+          <Property Name="IdPatient" Type="int" />
+        </EntityType>
+        <EntityType Name="Meals">
+          <Key>
+            <PropertyRef Name="IdMeal" />
+          </Key>
+          <Property Name="IdMeal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MealType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Equivalences" Type="text" />
+          <Property Name="MealExamples" Type="text" />
+          <Property Name="IdMealPlan" Type="int" />
+        </EntityType>
+        <EntityType Name="Measures">
+          <Key>
+            <PropertyRef Name="IdMeasures" />
+          </Key>
+          <Property Name="IdMeasures" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Chest" Type="float" />
+          <Property Name="Arm" Type="float" />
+          <Property Name="ContractedArm" Type="float" />
+          <Property Name="Forearm" Type="float" />
+          <Property Name="Waist" Type="float" />
+          <Property Name="Hip" Type="float" />
+          <Property Name="Thigh" Type="float" />
+          <Property Name="Calf" Type="float" />
+          <Property Name="IdPatient" Type="int" />
+          <Property Name="IdDiagnosis" Type="int" />
+        </EntityType>
+        <EntityType Name="MedicalInformation">
+          <Key>
+            <PropertyRef Name="IdMedicalInformation" />
+          </Key>
+          <Property Name="IdMedicalInformation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChronicDiseases" Type="text" />
+          <Property Name="HereditaryFamilyHistory" Type="text" />
+          <Property Name="GastrointestinalDiseases" Type="text" />
+          <Property Name="FoodAllergies" Type="text" />
+          <Property Name="NOFoodAllergies" Type="text" />
+          <Property Name="SurgicalHistory" Type="text" />
+          <Property Name="Medications" Type="text" />
+          <Property Name="GeneralMedicalComments" Type="text" />
+          <Property Name="IdPatient" Type="int" />
+        </EntityType>
+        <EntityType Name="Nutritionists">
+          <Key>
+            <PropertyRef Name="IdNutritionist" />
+          </Key>
+          <Property Name="IdNutritionist" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPerson" Type="int" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="IdPatient" />
+          </Key>
+          <Property Name="IdPatient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Height" Type="float" />
+          <Property Name="Birthdate" Type="date" />
+          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="IdPerson" Type="int" />
+          <Property Name="IdNutritionist" Type="int" />
+        </EntityType>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="IdPerson" />
+          </Key>
+          <Property Name="IdPerson" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Names" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstLastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SecondLastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="Phone" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__Account__IdNutri__3B75D760">
+          <End Role="Nutritionists" Type="Self.Nutritionists" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nutritionists">
+              <PropertyRef Name="IdNutritionist" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="IdNutritionist" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Appointme__IdNut__4316F928">
+          <End Role="Nutritionists" Type="Self.Nutritionists" Multiplicity="0..1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nutritionists">
+              <PropertyRef Name="IdNutritionist" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="IdNutritionist" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Appointme__IdPat__4222D4EF">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IdPatient" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BodyCompo__IdDia__5629CD9C">
+          <End Role="Diagnoses" Type="Self.Diagnoses" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BodyCompositions" Type="Self.BodyCompositions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnoses">
+              <PropertyRef Name="IdDiagnosis" />
+            </Principal>
+            <Dependent Role="BodyCompositions">
+              <PropertyRef Name="IdDiagnosis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BodyCompo__IdPat__5535A963">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="BodyCompositions" Type="Self.BodyCompositions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IdPatient" />
+            </Principal>
+            <Dependent Role="BodyCompositions">
+              <PropertyRef Name="IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Diagnoses__IdPat__4E88ABD4">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Diagnoses" Type="Self.Diagnoses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IdPatient" />
+            </Principal>
+            <Dependent Role="Diagnoses">
+              <PropertyRef Name="IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GeneralIn__IdPat__48CFD27E">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GeneralInformation" Type="Self.GeneralInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IdPatient" />
+            </Principal>
+            <Dependent Role="GeneralInformation">
+              <PropertyRef Name="IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HabitsAnd__IdPat__4BAC3F29">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HabitsAndGoals" Type="Self.HabitsAndGoals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IdPatient" />
+            </Principal>
+            <Dependent Role="HabitsAndGoals">
+              <PropertyRef Name="IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Images__IdDiagno__02FC7413">
+          <End Role="Diagnoses" Type="Self.Diagnoses" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Images" Type="Self.Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnoses">
+              <PropertyRef Name="IdDiagnosis" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="IdDiagnosis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MealPlans__IdPat__59063A47">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MealPlans" Type="Self.MealPlans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IdPatient" />
+            </Principal>
+            <Dependent Role="MealPlans">
+              <PropertyRef Name="IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meals__IdMealPla__5BE2A6F2">
+          <End Role="MealPlans" Type="Self.MealPlans" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Meals" Type="Self.Meals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MealPlans">
+              <PropertyRef Name="IdMealPlan" />
+            </Principal>
+            <Dependent Role="Meals">
+              <PropertyRef Name="IdMealPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Measures__IdDiag__52593CB8">
+          <End Role="Diagnoses" Type="Self.Diagnoses" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Measures" Type="Self.Measures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnoses">
+              <PropertyRef Name="IdDiagnosis" />
+            </Principal>
+            <Dependent Role="Measures">
+              <PropertyRef Name="IdDiagnosis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Measures__IdPati__5165187F">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="Measures" Type="Self.Measures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IdPatient" />
+            </Principal>
+            <Dependent Role="Measures">
+              <PropertyRef Name="IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MedicalIn__IdPat__45F365D3">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MedicalInformation" Type="Self.MedicalInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IdPatient" />
+            </Principal>
+            <Dependent Role="MedicalInformation">
+              <PropertyRef Name="IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Nutrition__IdPer__38996AB5">
+          <End Role="People" Type="Self.People" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Nutritionists" Type="Self.Nutritionists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="IdPerson" />
+            </Principal>
+            <Dependent Role="Nutritionists">
+              <PropertyRef Name="IdPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Patients__IdNutr__3F466844">
+          <End Role="Nutritionists" Type="Self.Nutritionists" Multiplicity="0..1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nutritionists">
+              <PropertyRef Name="IdNutritionist" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="IdNutritionist" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Patients__IdPers__3E52440B">
+          <End Role="People" Type="Self.People" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="IdPerson" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="IdPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HealthDivineModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Appointment" EntityType="Self.Appointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BodyCompositions" EntityType="Self.BodyCompositions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Diagnoses" EntityType="Self.Diagnoses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GeneralInformation" EntityType="Self.GeneralInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HabitsAndGoals" EntityType="Self.HabitsAndGoals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MealPlans" EntityType="Self.MealPlans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meals" EntityType="Self.Meals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Measures" EntityType="Self.Measures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MedicalInformation" EntityType="Self.MedicalInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nutritionists" EntityType="Self.Nutritionists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Account__IdNutri__3B75D760" Association="Self.FK__Account__IdNutri__3B75D760">
+            <End Role="Nutritionists" EntitySet="Nutritionists" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Appointme__IdNut__4316F928" Association="Self.FK__Appointme__IdNut__4316F928">
+            <End Role="Nutritionists" EntitySet="Nutritionists" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Appointme__IdPat__4222D4EF" Association="Self.FK__Appointme__IdPat__4222D4EF">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BodyCompo__IdDia__5629CD9C" Association="Self.FK__BodyCompo__IdDia__5629CD9C">
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+            <End Role="BodyCompositions" EntitySet="BodyCompositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BodyCompo__IdPat__5535A963" Association="Self.FK__BodyCompo__IdPat__5535A963">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="BodyCompositions" EntitySet="BodyCompositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Diagnoses__IdPat__4E88ABD4" Association="Self.FK__Diagnoses__IdPat__4E88ABD4">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GeneralIn__IdPat__48CFD27E" Association="Self.FK__GeneralIn__IdPat__48CFD27E">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="GeneralInformation" EntitySet="GeneralInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HabitsAnd__IdPat__4BAC3F29" Association="Self.FK__HabitsAnd__IdPat__4BAC3F29">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="HabitsAndGoals" EntitySet="HabitsAndGoals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Images__IdDiagno__02FC7413" Association="Self.FK__Images__IdDiagno__02FC7413">
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MealPlans__IdPat__59063A47" Association="Self.FK__MealPlans__IdPat__59063A47">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="MealPlans" EntitySet="MealPlans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meals__IdMealPla__5BE2A6F2" Association="Self.FK__Meals__IdMealPla__5BE2A6F2">
+            <End Role="MealPlans" EntitySet="MealPlans" />
+            <End Role="Meals" EntitySet="Meals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Measures__IdDiag__52593CB8" Association="Self.FK__Measures__IdDiag__52593CB8">
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+            <End Role="Measures" EntitySet="Measures" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Measures__IdPati__5165187F" Association="Self.FK__Measures__IdPati__5165187F">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Measures" EntitySet="Measures" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MedicalIn__IdPat__45F365D3" Association="Self.FK__MedicalIn__IdPat__45F365D3">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="MedicalInformation" EntitySet="MedicalInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Nutrition__IdPer__38996AB5" Association="Self.FK__Nutrition__IdPer__38996AB5">
+            <End Role="People" EntitySet="People" />
+            <End Role="Nutritionists" EntitySet="Nutritionists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Patients__IdNutr__3F466844" Association="Self.FK__Patients__IdNutr__3F466844">
+            <End Role="Nutritionists" EntitySet="Nutritionists" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Patients__IdPers__3E52440B" Association="Self.FK__Patients__IdPers__3E52440B">
+            <End Role="People" EntitySet="People" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HealthDivineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="IdAccount" />
+          </Key>
+          <Property Name="IdAccount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AccountPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdNutritionist" Type="Int32" />
+          <NavigationProperty Name="Nutritionists" Relationship="Self.FK__Account__IdNutri__3B75D760" FromRole="Account" ToRole="Nutritionists" />
+        </EntityType>
+        <EntityType Name="Appointment">
+          <Key>
+            <PropertyRef Name="IdAppointment" />
+          </Key>
+          <Property Name="IdAppointment" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppointmentDate" Type="DateTime" Precision="0" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="EndTime" Type="Time" Precision="7" />
+          <Property Name="IdPatient" Type="Int32" />
+          <Property Name="IdNutritionist" Type="Int32" />
+          <NavigationProperty Name="Nutritionists" Relationship="Self.FK__Appointme__IdNut__4316F928" FromRole="Appointment" ToRole="Nutritionists" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK__Appointme__IdPat__4222D4EF" FromRole="Appointment" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="BodyCompositions">
+          <Key>
+            <PropertyRef Name="IdBodyComposition" />
+          </Key>
+          <Property Name="IdBodyComposition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VisceralFat" Type="Double" />
+          <Property Name="TotalWeight" Type="Double" />
+          <Property Name="WaterPercentage" Type="Double" />
+          <Property Name="FatPercentage" Type="Double" />
+          <Property Name="MusclePercentage" Type="Double" />
+          <Property Name="IdPatient" Type="Int32" />
+          <Property Name="IdDiagnosis" Type="Int32" />
+          <NavigationProperty Name="Diagnoses" Relationship="Self.FK__BodyCompo__IdDia__5629CD9C" FromRole="BodyCompositions" ToRole="Diagnoses" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK__BodyCompo__IdPat__5535A963" FromRole="BodyCompositions" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="Diagnoses">
+          <Key>
+            <PropertyRef Name="IdDiagnosis" />
+          </Key>
+          <Property Name="IdDiagnosis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DiagnosisDate" Type="DateTime" Precision="0" />
+          <Property Name="PhysicalActivity" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PhysicalPerception" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Feeding" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Appetite" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="WaterConsumption" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Dream" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StomachUpset" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EnergyLevel" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StressLevel" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SubstanceUse" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="GeneralComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdPatient" Type="Int32" />
+          <NavigationProperty Name="BodyCompositions" Relationship="Self.FK__BodyCompo__IdDia__5629CD9C" FromRole="Diagnoses" ToRole="BodyCompositions" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK__Diagnoses__IdPat__4E88ABD4" FromRole="Diagnoses" ToRole="Patients" />
+          <NavigationProperty Name="Images" Relationship="Self.FK__Images__IdDiagno__02FC7413" FromRole="Diagnoses" ToRole="Images" />
+          <NavigationProperty Name="Measures" Relationship="Self.FK__Measures__IdDiag__52593CB8" FromRole="Diagnoses" ToRole="Measures" />
+        </EntityType>
+        <EntityType Name="GeneralInformation">
+          <Key>
+            <PropertyRef Name="IdGeneralInformation" />
+          </Key>
+          <Property Name="IdGeneralInformation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PhysicalActivity" Type="Int32" />
+          <Property Name="PhysicalActivityComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FavoriteFoods" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NonFavoriteFoods" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DietarySupplements" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NutritionalFamiliarity" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EatingEmotionalBehavior" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="GeneralComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdPatient" Type="Int32" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK__GeneralIn__IdPat__48CFD27E" FromRole="GeneralInformation" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="HabitsAndGoals">
+          <Key>
+            <PropertyRef Name="IdHabitsAndGoals" />
+          </Key>
+          <Property Name="IdHabitsAndGoals" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Caffeine" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Alcohol" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Cigarette" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Drugs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HealthGoals" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SpecificNutritionalGoals" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Expectations" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="GeneralComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdPatient" Type="Int32" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK__HabitsAnd__IdPat__4BAC3F29" FromRole="HabitsAndGoals" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="IdImage" />
+          </Key>
+          <Property Name="IdImage" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IdDiagnosis" Type="Int32" />
+          <NavigationProperty Name="Diagnoses" Relationship="Self.FK__Images__IdDiagno__02FC7413" FromRole="Images" ToRole="Diagnoses" />
+        </EntityType>
+        <EntityType Name="MealPlans">
+          <Key>
+            <PropertyRef Name="IdMealPlan" />
+          </Key>
+          <Property Name="IdMealPlan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PlanDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PlanDate" Type="DateTime" Precision="0" />
+          <Property Name="Recommendations" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdPatient" Type="Int32" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK__MealPlans__IdPat__59063A47" FromRole="MealPlans" ToRole="Patients" />
+          <NavigationProperty Name="Meals" Relationship="Self.FK__Meals__IdMealPla__5BE2A6F2" FromRole="MealPlans" ToRole="Meals" />
+        </EntityType>
+        <EntityType Name="Meals">
+          <Key>
+            <PropertyRef Name="IdMeal" />
+          </Key>
+          <Property Name="IdMeal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MealType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Equivalences" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="MealExamples" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdMealPlan" Type="Int32" />
+          <NavigationProperty Name="MealPlans" Relationship="Self.FK__Meals__IdMealPla__5BE2A6F2" FromRole="Meals" ToRole="MealPlans" />
+        </EntityType>
+        <EntityType Name="Measures">
+          <Key>
+            <PropertyRef Name="IdMeasures" />
+          </Key>
+          <Property Name="IdMeasures" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Chest" Type="Double" />
+          <Property Name="Arm" Type="Double" />
+          <Property Name="ContractedArm" Type="Double" />
+          <Property Name="Forearm" Type="Double" />
+          <Property Name="Waist" Type="Double" />
+          <Property Name="Hip" Type="Double" />
+          <Property Name="Thigh" Type="Double" />
+          <Property Name="Calf" Type="Double" />
+          <Property Name="IdPatient" Type="Int32" />
+          <Property Name="IdDiagnosis" Type="Int32" />
+          <NavigationProperty Name="Diagnoses" Relationship="Self.FK__Measures__IdDiag__52593CB8" FromRole="Measures" ToRole="Diagnoses" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK__Measures__IdPati__5165187F" FromRole="Measures" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="MedicalInformation">
+          <Key>
+            <PropertyRef Name="IdMedicalInformation" />
+          </Key>
+          <Property Name="IdMedicalInformation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChronicDiseases" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="HereditaryFamilyHistory" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="GastrointestinalDiseases" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FoodAllergies" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NOFoodAllergies" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SurgicalHistory" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Medications" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="GeneralMedicalComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdPatient" Type="Int32" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK__MedicalIn__IdPat__45F365D3" FromRole="MedicalInformation" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="Nutritionists">
+          <Key>
+            <PropertyRef Name="IdNutritionist" />
+          </Key>
+          <Property Name="IdNutritionist" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPerson" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Account__IdNutri__3B75D760" FromRole="Nutritionists" ToRole="Account" />
+          <NavigationProperty Name="Appointment" Relationship="Self.FK__Appointme__IdNut__4316F928" FromRole="Nutritionists" ToRole="Appointment" />
+          <NavigationProperty Name="People" Relationship="Self.FK__Nutrition__IdPer__38996AB5" FromRole="Nutritionists" ToRole="People" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK__Patients__IdNutr__3F466844" FromRole="Nutritionists" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="IdPatient" />
+          </Key>
+          <Property Name="IdPatient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="Birthdate" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IdPerson" Type="Int32" />
+          <Property Name="IdNutritionist" Type="Int32" />
+          <NavigationProperty Name="Appointment" Relationship="Self.FK__Appointme__IdPat__4222D4EF" FromRole="Patients" ToRole="Appointment" />
+          <NavigationProperty Name="BodyCompositions" Relationship="Self.FK__BodyCompo__IdPat__5535A963" FromRole="Patients" ToRole="BodyCompositions" />
+          <NavigationProperty Name="Diagnoses" Relationship="Self.FK__Diagnoses__IdPat__4E88ABD4" FromRole="Patients" ToRole="Diagnoses" />
+          <NavigationProperty Name="GeneralInformation" Relationship="Self.FK__GeneralIn__IdPat__48CFD27E" FromRole="Patients" ToRole="GeneralInformation" />
+          <NavigationProperty Name="HabitsAndGoals" Relationship="Self.FK__HabitsAnd__IdPat__4BAC3F29" FromRole="Patients" ToRole="HabitsAndGoals" />
+          <NavigationProperty Name="MealPlans" Relationship="Self.FK__MealPlans__IdPat__59063A47" FromRole="Patients" ToRole="MealPlans" />
+          <NavigationProperty Name="Measures" Relationship="Self.FK__Measures__IdPati__5165187F" FromRole="Patients" ToRole="Measures" />
+          <NavigationProperty Name="MedicalInformation" Relationship="Self.FK__MedicalIn__IdPat__45F365D3" FromRole="Patients" ToRole="MedicalInformation" />
+          <NavigationProperty Name="Nutritionists" Relationship="Self.FK__Patients__IdNutr__3F466844" FromRole="Patients" ToRole="Nutritionists" />
+          <NavigationProperty Name="People" Relationship="Self.FK__Patients__IdPers__3E52440B" FromRole="Patients" ToRole="People" />
+        </EntityType>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="IdPerson" />
+          </Key>
+          <Property Name="IdPerson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Names" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SecondLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Nutritionists" Relationship="Self.FK__Nutrition__IdPer__38996AB5" FromRole="People" ToRole="Nutritionists" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK__Patients__IdPers__3E52440B" FromRole="People" ToRole="Patients" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__Account__IdNutri__3B75D760">
+          <End Role="Nutritionists" Type="Self.Nutritionists" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Account" Type="Self.Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nutritionists">
+              <PropertyRef Name="IdNutritionist" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="IdNutritionist" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Appointme__IdNut__4316F928">
+          <End Role="Nutritionists" Type="Self.Nutritionists" Multiplicity="0..1" />
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nutritionists">
+              <PropertyRef Name="IdNutritionist" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="IdNutritionist" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Appointme__IdPat__4222D4EF">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Appointment" Type="Self.Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IdPatient" />
+            </Principal>
+            <Dependent Role="Appointment">
+              <PropertyRef Name="IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BodyCompo__IdDia__5629CD9C">
+          <End Role="Diagnoses" Type="Self.Diagnoses" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BodyCompositions" Type="Self.BodyCompositions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnoses">
+              <PropertyRef Name="IdDiagnosis" />
+            </Principal>
+            <Dependent Role="BodyCompositions">
+              <PropertyRef Name="IdDiagnosis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BodyCompo__IdPat__5535A963">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="BodyCompositions" Type="Self.BodyCompositions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IdPatient" />
+            </Principal>
+            <Dependent Role="BodyCompositions">
+              <PropertyRef Name="IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Diagnoses__IdPat__4E88ABD4">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Diagnoses" Type="Self.Diagnoses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IdPatient" />
+            </Principal>
+            <Dependent Role="Diagnoses">
+              <PropertyRef Name="IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Images__IdDiagno__02FC7413">
+          <End Role="Diagnoses" Type="Self.Diagnoses" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Images" Type="Self.Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnoses">
+              <PropertyRef Name="IdDiagnosis" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="IdDiagnosis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Measures__IdDiag__52593CB8">
+          <End Role="Diagnoses" Type="Self.Diagnoses" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Measures" Type="Self.Measures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnoses">
+              <PropertyRef Name="IdDiagnosis" />
+            </Principal>
+            <Dependent Role="Measures">
+              <PropertyRef Name="IdDiagnosis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GeneralIn__IdPat__48CFD27E">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="GeneralInformation" Type="Self.GeneralInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IdPatient" />
+            </Principal>
+            <Dependent Role="GeneralInformation">
+              <PropertyRef Name="IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HabitsAnd__IdPat__4BAC3F29">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="HabitsAndGoals" Type="Self.HabitsAndGoals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IdPatient" />
+            </Principal>
+            <Dependent Role="HabitsAndGoals">
+              <PropertyRef Name="IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MealPlans__IdPat__59063A47">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MealPlans" Type="Self.MealPlans" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IdPatient" />
+            </Principal>
+            <Dependent Role="MealPlans">
+              <PropertyRef Name="IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meals__IdMealPla__5BE2A6F2">
+          <End Role="MealPlans" Type="Self.MealPlans" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Meals" Type="Self.Meals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MealPlans">
+              <PropertyRef Name="IdMealPlan" />
+            </Principal>
+            <Dependent Role="Meals">
+              <PropertyRef Name="IdMealPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Measures__IdPati__5165187F">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="Measures" Type="Self.Measures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IdPatient" />
+            </Principal>
+            <Dependent Role="Measures">
+              <PropertyRef Name="IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MedicalIn__IdPat__45F365D3">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MedicalInformation" Type="Self.MedicalInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="IdPatient" />
+            </Principal>
+            <Dependent Role="MedicalInformation">
+              <PropertyRef Name="IdPatient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Nutrition__IdPer__38996AB5">
+          <End Role="People" Type="Self.People" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Nutritionists" Type="Self.Nutritionists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="IdPerson" />
+            </Principal>
+            <Dependent Role="Nutritionists">
+              <PropertyRef Name="IdPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Patients__IdNutr__3F466844">
+          <End Role="Nutritionists" Type="Self.Nutritionists" Multiplicity="0..1" />
+          <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nutritionists">
+              <PropertyRef Name="IdNutritionist" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="IdNutritionist" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Patients__IdPers__3E52440B">
+          <End Role="People" Type="Self.People" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Patients" Type="Self.Patients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="IdPerson" />
+            </Principal>
+            <Dependent Role="Patients">
+              <PropertyRef Name="IdPerson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HealthDivineEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Account" EntityType="Self.Account" />
+          <EntitySet Name="Appointment" EntityType="Self.Appointment" />
+          <EntitySet Name="BodyCompositions" EntityType="Self.BodyCompositions" />
+          <EntitySet Name="Diagnoses" EntityType="Self.Diagnoses" />
+          <EntitySet Name="GeneralInformation" EntityType="Self.GeneralInformation" />
+          <EntitySet Name="HabitsAndGoals" EntityType="Self.HabitsAndGoals" />
+          <EntitySet Name="Images" EntityType="Self.Images" />
+          <EntitySet Name="MealPlans" EntityType="Self.MealPlans" />
+          <EntitySet Name="Meals" EntityType="Self.Meals" />
+          <EntitySet Name="Measures" EntityType="Self.Measures" />
+          <EntitySet Name="MedicalInformation" EntityType="Self.MedicalInformation" />
+          <EntitySet Name="Nutritionists" EntityType="Self.Nutritionists" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" />
+          <EntitySet Name="People" EntityType="Self.People" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK__Account__IdNutri__3B75D760" Association="Self.FK__Account__IdNutri__3B75D760">
+            <End Role="Nutritionists" EntitySet="Nutritionists" />
+            <End Role="Account" EntitySet="Account" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Appointme__IdNut__4316F928" Association="Self.FK__Appointme__IdNut__4316F928">
+            <End Role="Nutritionists" EntitySet="Nutritionists" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Appointme__IdPat__4222D4EF" Association="Self.FK__Appointme__IdPat__4222D4EF">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Appointment" EntitySet="Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BodyCompo__IdDia__5629CD9C" Association="Self.FK__BodyCompo__IdDia__5629CD9C">
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+            <End Role="BodyCompositions" EntitySet="BodyCompositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BodyCompo__IdPat__5535A963" Association="Self.FK__BodyCompo__IdPat__5535A963">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="BodyCompositions" EntitySet="BodyCompositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Diagnoses__IdPat__4E88ABD4" Association="Self.FK__Diagnoses__IdPat__4E88ABD4">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Images__IdDiagno__02FC7413" Association="Self.FK__Images__IdDiagno__02FC7413">
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Measures__IdDiag__52593CB8" Association="Self.FK__Measures__IdDiag__52593CB8">
+            <End Role="Diagnoses" EntitySet="Diagnoses" />
+            <End Role="Measures" EntitySet="Measures" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GeneralIn__IdPat__48CFD27E" Association="Self.FK__GeneralIn__IdPat__48CFD27E">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="GeneralInformation" EntitySet="GeneralInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HabitsAnd__IdPat__4BAC3F29" Association="Self.FK__HabitsAnd__IdPat__4BAC3F29">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="HabitsAndGoals" EntitySet="HabitsAndGoals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MealPlans__IdPat__59063A47" Association="Self.FK__MealPlans__IdPat__59063A47">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="MealPlans" EntitySet="MealPlans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meals__IdMealPla__5BE2A6F2" Association="Self.FK__Meals__IdMealPla__5BE2A6F2">
+            <End Role="MealPlans" EntitySet="MealPlans" />
+            <End Role="Meals" EntitySet="Meals" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Measures__IdPati__5165187F" Association="Self.FK__Measures__IdPati__5165187F">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Measures" EntitySet="Measures" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MedicalIn__IdPat__45F365D3" Association="Self.FK__MedicalIn__IdPat__45F365D3">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="MedicalInformation" EntitySet="MedicalInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Nutrition__IdPer__38996AB5" Association="Self.FK__Nutrition__IdPer__38996AB5">
+            <End Role="People" EntitySet="People" />
+            <End Role="Nutritionists" EntitySet="Nutritionists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Patients__IdNutr__3F466844" Association="Self.FK__Patients__IdNutr__3F466844">
+            <End Role="Nutritionists" EntitySet="Nutritionists" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Patients__IdPers__3E52440B" Association="Self.FK__Patients__IdPers__3E52440B">
+            <End Role="People" EntitySet="People" />
+            <End Role="Patients" EntitySet="Patients" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HealthDivineModelStoreContainer" CdmEntityContainer="HealthDivineEntities">
+          <EntitySetMapping Name="Account">
+            <EntityTypeMapping TypeName="HealthDivineModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="IdAccount" ColumnName="IdAccount" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="AccountPassword" ColumnName="AccountPassword" />
+                <ScalarProperty Name="IdNutritionist" ColumnName="IdNutritionist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Appointment">
+            <EntityTypeMapping TypeName="HealthDivineModel.Appointment">
+              <MappingFragment StoreEntitySet="Appointment">
+                <ScalarProperty Name="IdAppointment" ColumnName="IdAppointment" />
+                <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="IdPatient" ColumnName="IdPatient" />
+                <ScalarProperty Name="IdNutritionist" ColumnName="IdNutritionist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BodyCompositions">
+            <EntityTypeMapping TypeName="HealthDivineModel.BodyCompositions">
+              <MappingFragment StoreEntitySet="BodyCompositions">
+                <ScalarProperty Name="IdBodyComposition" ColumnName="IdBodyComposition" />
+                <ScalarProperty Name="VisceralFat" ColumnName="VisceralFat" />
+                <ScalarProperty Name="TotalWeight" ColumnName="TotalWeight" />
+                <ScalarProperty Name="WaterPercentage" ColumnName="WaterPercentage" />
+                <ScalarProperty Name="FatPercentage" ColumnName="FatPercentage" />
+                <ScalarProperty Name="MusclePercentage" ColumnName="MusclePercentage" />
+                <ScalarProperty Name="IdPatient" ColumnName="IdPatient" />
+                <ScalarProperty Name="IdDiagnosis" ColumnName="IdDiagnosis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Diagnoses">
+            <EntityTypeMapping TypeName="HealthDivineModel.Diagnoses">
+              <MappingFragment StoreEntitySet="Diagnoses">
+                <ScalarProperty Name="IdDiagnosis" ColumnName="IdDiagnosis" />
+                <ScalarProperty Name="DiagnosisDate" ColumnName="DiagnosisDate" />
+                <ScalarProperty Name="PhysicalActivity" ColumnName="PhysicalActivity" />
+                <ScalarProperty Name="PhysicalPerception" ColumnName="PhysicalPerception" />
+                <ScalarProperty Name="Feeding" ColumnName="Feeding" />
+                <ScalarProperty Name="Appetite" ColumnName="Appetite" />
+                <ScalarProperty Name="WaterConsumption" ColumnName="WaterConsumption" />
+                <ScalarProperty Name="Dream" ColumnName="Dream" />
+                <ScalarProperty Name="StomachUpset" ColumnName="StomachUpset" />
+                <ScalarProperty Name="EnergyLevel" ColumnName="EnergyLevel" />
+                <ScalarProperty Name="StressLevel" ColumnName="StressLevel" />
+                <ScalarProperty Name="SubstanceUse" ColumnName="SubstanceUse" />
+                <ScalarProperty Name="GeneralComments" ColumnName="GeneralComments" />
+                <ScalarProperty Name="IdPatient" ColumnName="IdPatient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeneralInformation">
+            <EntityTypeMapping TypeName="HealthDivineModel.GeneralInformation">
+              <MappingFragment StoreEntitySet="GeneralInformation">
+                <ScalarProperty Name="IdGeneralInformation" ColumnName="IdGeneralInformation" />
+                <ScalarProperty Name="PhysicalActivity" ColumnName="PhysicalActivity" />
+                <ScalarProperty Name="PhysicalActivityComments" ColumnName="PhysicalActivityComments" />
+                <ScalarProperty Name="FavoriteFoods" ColumnName="FavoriteFoods" />
+                <ScalarProperty Name="NonFavoriteFoods" ColumnName="NonFavoriteFoods" />
+                <ScalarProperty Name="DietarySupplements" ColumnName="DietarySupplements" />
+                <ScalarProperty Name="NutritionalFamiliarity" ColumnName="NutritionalFamiliarity" />
+                <ScalarProperty Name="EatingEmotionalBehavior" ColumnName="EatingEmotionalBehavior" />
+                <ScalarProperty Name="GeneralComments" ColumnName="GeneralComments" />
+                <ScalarProperty Name="IdPatient" ColumnName="IdPatient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HabitsAndGoals">
+            <EntityTypeMapping TypeName="HealthDivineModel.HabitsAndGoals">
+              <MappingFragment StoreEntitySet="HabitsAndGoals">
+                <ScalarProperty Name="IdHabitsAndGoals" ColumnName="IdHabitsAndGoals" />
+                <ScalarProperty Name="Caffeine" ColumnName="Caffeine" />
+                <ScalarProperty Name="Alcohol" ColumnName="Alcohol" />
+                <ScalarProperty Name="Cigarette" ColumnName="Cigarette" />
+                <ScalarProperty Name="Drugs" ColumnName="Drugs" />
+                <ScalarProperty Name="HealthGoals" ColumnName="HealthGoals" />
+                <ScalarProperty Name="SpecificNutritionalGoals" ColumnName="SpecificNutritionalGoals" />
+                <ScalarProperty Name="Expectations" ColumnName="Expectations" />
+                <ScalarProperty Name="GeneralComments" ColumnName="GeneralComments" />
+                <ScalarProperty Name="IdPatient" ColumnName="IdPatient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="HealthDivineModel.Images">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="IdImage" ColumnName="IdImage" />
+                <ScalarProperty Name="ImageComments" ColumnName="ImageComments" />
+                <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+                <ScalarProperty Name="IdDiagnosis" ColumnName="IdDiagnosis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MealPlans">
+            <EntityTypeMapping TypeName="HealthDivineModel.MealPlans">
+              <MappingFragment StoreEntitySet="MealPlans">
+                <ScalarProperty Name="IdMealPlan" ColumnName="IdMealPlan" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="PlanDescription" ColumnName="PlanDescription" />
+                <ScalarProperty Name="PlanDate" ColumnName="PlanDate" />
+                <ScalarProperty Name="Recommendations" ColumnName="Recommendations" />
+                <ScalarProperty Name="IdPatient" ColumnName="IdPatient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meals">
+            <EntityTypeMapping TypeName="HealthDivineModel.Meals">
+              <MappingFragment StoreEntitySet="Meals">
+                <ScalarProperty Name="IdMeal" ColumnName="IdMeal" />
+                <ScalarProperty Name="MealType" ColumnName="MealType" />
+                <ScalarProperty Name="Equivalences" ColumnName="Equivalences" />
+                <ScalarProperty Name="MealExamples" ColumnName="MealExamples" />
+                <ScalarProperty Name="IdMealPlan" ColumnName="IdMealPlan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Measures">
+            <EntityTypeMapping TypeName="HealthDivineModel.Measures">
+              <MappingFragment StoreEntitySet="Measures">
+                <ScalarProperty Name="IdMeasures" ColumnName="IdMeasures" />
+                <ScalarProperty Name="Chest" ColumnName="Chest" />
+                <ScalarProperty Name="Arm" ColumnName="Arm" />
+                <ScalarProperty Name="ContractedArm" ColumnName="ContractedArm" />
+                <ScalarProperty Name="Forearm" ColumnName="Forearm" />
+                <ScalarProperty Name="Waist" ColumnName="Waist" />
+                <ScalarProperty Name="Hip" ColumnName="Hip" />
+                <ScalarProperty Name="Thigh" ColumnName="Thigh" />
+                <ScalarProperty Name="Calf" ColumnName="Calf" />
+                <ScalarProperty Name="IdPatient" ColumnName="IdPatient" />
+                <ScalarProperty Name="IdDiagnosis" ColumnName="IdDiagnosis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MedicalInformation">
+            <EntityTypeMapping TypeName="HealthDivineModel.MedicalInformation">
+              <MappingFragment StoreEntitySet="MedicalInformation">
+                <ScalarProperty Name="IdMedicalInformation" ColumnName="IdMedicalInformation" />
+                <ScalarProperty Name="ChronicDiseases" ColumnName="ChronicDiseases" />
+                <ScalarProperty Name="HereditaryFamilyHistory" ColumnName="HereditaryFamilyHistory" />
+                <ScalarProperty Name="GastrointestinalDiseases" ColumnName="GastrointestinalDiseases" />
+                <ScalarProperty Name="FoodAllergies" ColumnName="FoodAllergies" />
+                <ScalarProperty Name="NOFoodAllergies" ColumnName="NOFoodAllergies" />
+                <ScalarProperty Name="SurgicalHistory" ColumnName="SurgicalHistory" />
+                <ScalarProperty Name="Medications" ColumnName="Medications" />
+                <ScalarProperty Name="GeneralMedicalComments" ColumnName="GeneralMedicalComments" />
+                <ScalarProperty Name="IdPatient" ColumnName="IdPatient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nutritionists">
+            <EntityTypeMapping TypeName="HealthDivineModel.Nutritionists">
+              <MappingFragment StoreEntitySet="Nutritionists">
+                <ScalarProperty Name="IdNutritionist" ColumnName="IdNutritionist" />
+                <ScalarProperty Name="IdPerson" ColumnName="IdPerson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="HealthDivineModel.Patients">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="IdPatient" ColumnName="IdPatient" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="IdPerson" ColumnName="IdPerson" />
+                <ScalarProperty Name="IdNutritionist" ColumnName="IdNutritionist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="HealthDivineModel.People">
+              <MappingFragment StoreEntitySet="People">
+                <ScalarProperty Name="IdPerson" ColumnName="IdPerson" />
+                <ScalarProperty Name="Names" ColumnName="Names" />
+                <ScalarProperty Name="FirstLastName" ColumnName="FirstLastName" />
+                <ScalarProperty Name="SecondLastName" ColumnName="SecondLastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HealthDivineModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
